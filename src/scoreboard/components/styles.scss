@@ -1,0 +1,177 @@
+.title {
+  font-size: 70px;
+  line-height: 80px;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+}
+
+.search-container {
+  width: 70%;
+  margin: 24px auto 0;
+
+  .searchFlightsForm {
+    position: relative;
+
+    input {
+      display: block;
+      height: 80px;
+      width: 100%;
+      padding-left: 70px;
+      padding-right: 70px;
+      font-size: 24px;
+      border: none;
+      border-radius: 0 90px 0 0;
+      outline: none;
+    }
+
+    button {
+      width: 200px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: none;
+      border-radius: 0 80px 0 0;
+      padding: 0 20px;
+      font-size: 26px;
+      font-weight: 700;
+      text-align: left;
+      text-transform: uppercase;
+      background: #1eb7ee;
+      color: #fff;
+      transition: .3s ease-in-out;
+
+      &:hover {
+        border-radius: 0 40px 0 0;
+      }
+    }
+  }
+
+}
+
+.nav-tabs li:not(.active) a:hover {
+  background: #1eb7ee;
+  color: #fff;
+}
+
+.navigation {
+  .nav-tabs {
+    display: flex;
+
+    li {
+      cursor: pointer;
+      flex: 1 1 auto;
+      text-transform: uppercase;
+      padding: 0;
+      border: 0;
+      position: relative;
+      font-weight: 600;
+      border-radius: 0 60px 0 0;
+      transition: .3s ease-in-out;
+      outline: none;
+      background: #73d2f0;
+      overflow: hidden;
+
+      &.active {
+        border-radius: 60px 60px 0 0 !important;
+        cursor: default;
+        z-index: 1;
+        background: #fff;
+
+        a {
+          color: #1eb7ee;
+        }
+      }
+
+      &:not(.active) {
+          &:hover {
+            background: #1eb7ee;
+          }
+      }
+
+      &:first-of-type {
+        border-radius: 60px 0 0 0;
+        text-align: right;
+        margin-right: -60px;
+
+        a {
+          padding-right: 100px;
+        }
+      }
+
+      &:last-of-type {
+        a {
+          padding-left: 100px;
+        }
+      }
+
+      a {
+        transition: .3s ease-in-out;
+        outline: none;
+        padding: 0;
+        border: 0;
+        font-size: 24px;
+        line-height: 60px;
+        color: #fff;
+        text-decoration: none;
+        background-color: #0000;
+      }
+    }
+  }
+
+}
+
+.scoreboard {
+  &__table {
+    width: 100%;
+    margin-top: 35px;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+  }
+
+
+  &__header {
+    color: #95989a;
+    font-size: 16px;
+
+
+    th {
+      padding: .75rem;
+      font-weight: 400;
+
+      &:first-of-type {
+        text-align: center;
+      }
+    }
+  }
+
+  &__body {
+    font-size: 22px;
+
+    tr {
+      position: relative;
+      &:nth-of-type(odd) {
+        background-color: #0066871a;
+      }
+      &:nth-of-type(even) {
+        background-color: #fff;
+      }
+      &:hover {
+        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+      }
+
+      td {
+        font-size: 18px;
+        line-height: 40px;
+        padding: 16px 10px;
+        border: 0;
+
+        &:first-of-type {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
