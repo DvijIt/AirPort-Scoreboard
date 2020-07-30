@@ -1,14 +1,6 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types';
-import * as scoreboardActions from '../scoreboard.actions'
-import { fligthDepartureListSelector } from '../scoreboard.selectors';
+import React from 'react'
 
-const TableBody = ({ getFligthList, fligthList }) => {
-  useEffect(() => {
-    getFligthList()
-    console.log(fligthList)
-  }, [])
+const TableBody = () => {
   return (
     <tbody className="scoreboard__body">
       {/* {
@@ -29,24 +21,4 @@ const TableBody = ({ getFligthList, fligthList }) => {
   )
 }
 
-TableBody.propTypes = {
-  getFligthList: PropTypes.func
-  // fligthList: PropTypes.array
-}
-
-TableBody.defaultProps = {
-  getFligthList: PropTypes.func
-  // fligthList: PropTypes.array
-}
-
-const mapState = state => {
-  return {
-    fligthList: fligthDepartureListSelector(state)
-  }
-}
-
-const mapDispatch = {
-  getFligthList: scoreboardActions.getFligthList
-}
-
-export default connect(mapState, mapDispatch)(TableBody)
+export default TableBody
