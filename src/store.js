@@ -1,17 +1,13 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import scoreboardReducer from './scoreboard/scoreboard.reducer'
+import boardReducer from './scoreboard/scoreboard.reducers'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const reducer = combineReducers({
+  scoreboard: boardReducer
+});
 
-const appReducer = combineReducers({
-  scoreboard: scoreboardReducer
-})
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const store = createStore(
-  appReducer,
-  composeEnhancers(
-    applyMiddleware(thunk)
-  )
-);
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
+
 export default store

@@ -1,17 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import FlightLandSharpIcon from '@material-ui/icons/FlightLandSharp';
+import FlightTakeoffSharpIcon from '@material-ui/icons/FlightTakeoffSharp';
 
 const Navigation = () => {
   return (
     <nav className="navigation">
-      <ul className="nav-tabs">
-        <li className="nav-item">
-          <Link className="nav-link" to="/departure">departure</Link>
-        </li>
-        <li className="nav-item active">
-          <Link className="nav-link" to="/arrival">arrival</Link>
-        </li>
-      </ul>
+      <NavLink className="nav-link" to="/departure" activeClassName="active">
+        <FlightTakeoffSharpIcon />
+        departure
+      </NavLink>
+      <NavLink className="nav-link" to="/arrival" activeClassName="active">
+        <FlightLandSharpIcon />
+        arrival
+      </NavLink>
     </nav>
   )
 }

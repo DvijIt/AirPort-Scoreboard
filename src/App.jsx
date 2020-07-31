@@ -1,20 +1,21 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import { Route, BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
 import Scoreboard from './scoreboard/components/Scoreboard'
+import store from './store'
 
-function App() {
+const App = () => {
   return (
     <div className="wrapper">
-      <Router>
-        <Switch>
+      <Provider store={store}>
+        <BrowserRouter>
           <Route path="/:direction?/:flight?">
             <Scoreboard />
           </Route>
-        </Switch>
-      </Router>
+        </BrowserRouter>
+      </Provider>
     </div>
-  )
-}
+  );
+};
 
 export default App

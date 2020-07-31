@@ -1,16 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types';
-import { Switch } from 'react-router-dom'
+/* eslint-disable react/prop-types */
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux';
+import { useLocation, useParams } from 'react-router-dom';
+import qs from 'qs';
+import { scoreboardListSelector } from '../scoreboard.selectors';
+import * as actions from '../scoreboard.action';
 import TableBody from './TableBody'
-import { fligthDepartureListSelector } from '../scoreboard.selectors';
-import * as scoreboardActions from '../scoreboard.actions'
 
-const Table = ({ getFligthList, fligthList }) => {
+const Table = ({ scoreboardList, getScoreboardList }) => {
   useEffect(() => {
-    getFligthList()
-    console.log(fligthList)
-  }, [])
+    getScoreboardList();
+  }, []);
+
+  const { direction } = useParams();
+  let renderList = [];
+
+  if (scoreboardList) {
+    if (direction === 'arrival') {
+      renderList = scoreboardList.arrival
+        .map((item) => {
+          return {
+            ...item,
+            city: item['airportFromID.city_en'],
+            time: item.timeArrShedule
+          };
+        })
+        .sort((a, b) => a.time - b.time)
+    } else if (direction === 'departure') {
+      renderList = scoreboardList.departure
+        .map((item) => {
+          return {
+            ...item,
+            city: item['airportToID.city_en'],
+            time: item.timeArrShedule
+          };
+        })
+        .sort((a, b) => a.time - b.time)
+    }
+  }
+
+  const { search } = qs.parse(useLocation().search, { ignoreQueryPrefix: true });
+
+  const searchedFlight = !search
+    ? null
+    : scoreboardList.departure.filter((flightItem) => {
+      return flightItem.codeShareData[0].codeShare === search;
+    });
+
   return (
     <table className="scoreboard__table">
       <thead className="scoreboard__header">
@@ -23,29 +59,18 @@ const Table = ({ getFligthList, fligthList }) => {
           <th>Flight</th>
         </tr>
       </thead>
-      <Switch>
-        <TableBody />
-      </Switch>
+      <TableBody renderList={renderList} searchedFlight={searchedFlight} />
     </table>
   )
 }
 
-Table.propTypes = {
-  getFligthList: PropTypes.func
-  // fligthList: PropTypes.array
-}
-
-Table.defaultProps = {
-  getFligthList: PropTypes.func
-  // fligthList: PropTypes.array
-}
-const mapState = state => {
-  return {
-    fligthList: fligthDepartureListSelector(state)
-  }
-}
-
 const mapDispatch = {
-  getFligthList: scoreboardActions.getFligthList
+  getScoreboardList: actions.getScoreboardList
+}
+
+const mapState = (state) => {
+  return {
+    scoreboardList: scoreboardListSelector(state)
+  }
 }
 export default connect(mapState, mapDispatch)(Table)

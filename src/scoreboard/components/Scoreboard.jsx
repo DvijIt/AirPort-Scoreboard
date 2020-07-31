@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react'
-import SearchInput from './SearchInput'
+import React from 'react'
 import './styles.scss'
-import Navigation from './Navigation'
 import Table from './Table'
+import Navigation from './Navigation'
+import SearchForm from './SearchForm'
 
 const Scoreboard = () => {
-  useEffect(() => {
-  })
   return (
     <div className="wrapper-container">
-      <h2 className="title">Search flight</h2>
-      <SearchInput />
+      <h1 className="title">Search flight</h1>
+      <SearchForm />
       <Navigation />
       <Table />
     </div>

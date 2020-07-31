@@ -1,2 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
-export const fligthDepartureListSelector = state => state.scoreboard.fligthList
+export const scoreboardListSelector = state => state.scoreboard.scoreboardLists.body
+
+export const departureListSelector = state => state.scoreboard.scoreboardLists.body.departure

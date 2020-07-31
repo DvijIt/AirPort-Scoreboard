@@ -13,6 +13,16 @@
   .searchFlightsForm {
     position: relative;
 
+    .search__input-icon {
+      width: 44px;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      fill: #95989A;
+    }
+
     input {
       display: block;
       height: 80px;
@@ -39,8 +49,11 @@
       text-align: left;
       text-transform: uppercase;
       background: #1eb7ee;
-      color: #fff;
       transition: .3s ease-in-out;
+
+      a {
+        color: #fff;
+      }
 
       &:hover {
         border-radius: 0 40px 0 0;
@@ -50,78 +63,56 @@
 
 }
 
-.nav-tabs li:not(.active) a:hover {
-  background: #1eb7ee;
-  color: #fff;
-}
-
 .navigation {
-  .nav-tabs {
-    display: flex;
+  display: flex;
+  margin-top: 34px;
 
-    li {
-      cursor: pointer;
-      flex: 1 1 auto;
-      text-transform: uppercase;
-      padding: 0;
-      border: 0;
-      position: relative;
-      font-weight: 600;
-      border-radius: 0 60px 0 0;
-      transition: .3s ease-in-out;
-      outline: none;
-      background: #73d2f0;
-      overflow: hidden;
+  .nav-link {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 0;
+    border: 0;
+    border-radius: 0 60px 0 0;
+    font-size: 24px;
+    line-height: 60px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: #73d2f0;
+    color: #fff;
+    transition: .3s ease-in-out;
+    outline: none;
+    overflow: hidden;
+    cursor: pointer;
 
-      &.active {
-        border-radius: 60px 60px 0 0 !important;
-        cursor: default;
-        z-index: 1;
-        background: #fff;
+    &:first-of-type {
+      border-radius: 60px 0 0 0;
+      text-align: right;
+      margin-right: -60px;
+      padding-right: 100px;
+    }
 
-        a {
-          color: #1eb7ee;
-        }
-      }
+    &:last-of-type {
+      padding-left: 100px;
+    }
 
-      &:not(.active) {
-          &:hover {
-            background: #1eb7ee;
-          }
-      }
+    &.active {
+      border-radius: 60px 60px 0 0 !important;
+      cursor: default;
+      z-index: 1;
+      background: #fff;
+      color: #1eb7ee;
+    }
 
-      &:first-of-type {
-        border-radius: 60px 0 0 0;
-        text-align: right;
-        margin-right: -60px;
-
-        a {
-          padding-right: 100px;
-        }
-      }
-
-      &:last-of-type {
-        a {
-          padding-left: 100px;
-        }
-      }
-
-      a {
-        transition: .3s ease-in-out;
-        outline: none;
-        padding: 0;
-        border: 0;
-        font-size: 24px;
-        line-height: 60px;
-        color: #fff;
-        text-decoration: none;
-        background-color: #0000;
+    &:not(.active) {
+      &:hover {
+        background: #1eb7ee;
       }
     }
   }
-
 }
 
+// 
 .scoreboard {
   &__table {
     width: 100%;
@@ -159,6 +150,8 @@
         background-color: #fff;
       }
       &:hover {
+        transform: scale(1.01);
+        cursor: pointer;
         box-shadow: 0 5px 10px rgba(0,0,0,.2);
       }
 
@@ -174,4 +167,17 @@
       }
     }
   }
+}
+
+.image__logo {
+  width: 70px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.error {
+  margin-top: 55px;
+  font-weight: bold;
+  font-size: 32px;
+  text-transform: uppercase;
 }
