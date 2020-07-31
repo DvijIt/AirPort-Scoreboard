@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import { Switch } from 'react-router-dom'
@@ -6,7 +6,7 @@ import TableBody from './TableBody'
 import { fligthDepartureListSelector } from '../scoreboard.selectors';
 import * as scoreboardActions from '../scoreboard.actions'
 
-const Table = ({ getFligthList, fligthList}) => {
+const Table = ({ getFligthList, fligthList }) => {
   useEffect(() => {
     getFligthList()
     console.log(fligthList)
@@ -39,7 +39,6 @@ Table.defaultProps = {
   getFligthList: PropTypes.func
   // fligthList: PropTypes.array
 }
-
 const mapState = state => {
   return {
     fligthList: fligthDepartureListSelector(state)
@@ -49,5 +48,4 @@ const mapState = state => {
 const mapDispatch = {
   getFligthList: scoreboardActions.getFligthList
 }
-
 export default connect(mapState, mapDispatch)(Table)

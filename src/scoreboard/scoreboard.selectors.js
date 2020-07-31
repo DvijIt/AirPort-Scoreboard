@@ -1,14 +1,2 @@
-import { createSelector } from 'reselect'
-
+// eslint-disable-next-line import/prefer-default-export
 export const fligthDepartureListSelector = state => state.scoreboard.fligthList
-
-export const fligthArrivalListSelector = state => {
-  return state.scoreboard.fligthList.arrival
-}
-
-export const selectedfligthListSelector = createSelector(
-  [fligthDepartureListSelector],
-  (fligthList) => {
-    return fligthList
-  }
-);
