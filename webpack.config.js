@@ -39,7 +39,7 @@ module.exports = (env, argv) => {
     ],
     devServer: {
       hot: true,
-      port: 1700,
+      port: 1800,
       historyApiFallback: true
     },
     devtool: isDevelopment ? 'source-map' : false,

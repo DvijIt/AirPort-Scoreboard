@@ -1,20 +1,18 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-import Scoreboard from './scoreboard/components/Scoreboard'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import store from './store'
+import SearchFlightsPage from './scoreboard/components/Scoreboard'
+import './index.scss'
 
 function App() {
   return (
-    <div className="wrapper">
-      <Router>
-        <Switch>
-          <Route path="/:direction?/:flight?">
-            <Scoreboard />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
-  )
+    <Provider store={store}>
+      <BrowserRouter>
+        <SearchFlightsPage />
+      </BrowserRouter>
+    </Provider>
+  );
 }
 
 export default App

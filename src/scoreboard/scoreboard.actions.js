@@ -1,21 +1,18 @@
-import { fetchFligth } from './croreboard.gateways';
-import * as actionTypes from './scoreboard.types'
+import fetchFlights from './scoreboard.gateway'
 
-export const scoreboardListRecieved = (fligthList) => {
-  const action = {
-    type: actionTypes.SCOREBOARD_LIST_RECIVED,
-    payload: {
-      fligthList
-    }
-  };
-  return action;
-};
+export const FLIGHTS_LIST_RECIEVED = 'TASKS_LIST_RECIEVED'
 
-export const getFligthList = () => {
+export const flightsListRecieved = (flightsList, date) => {
+  return {
+    type: FLIGHTS_LIST_RECIEVED,
+    payload: { flightsList, date }
+  }
+}
+
+export const fetchFlightsList = (date) => {
   const thunkAction = async dispatch => {
-    const fligthList = await fetchFligth()
-    console.log(fligthList);
-    return dispatch(scoreboardListRecieved(fligthList.body))
+    const flightsList = await fetchFlights(date)
+    dispatch(flightsListRecieved(flightsList, date))
   };
-  return thunkAction;
-};
+  return thunkAction
+}

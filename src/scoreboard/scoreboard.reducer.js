@@ -1,19 +1,19 @@
-import * as actionTypes from './scoreboard.types'
+import { FLIGHTS_LIST_RECIEVED } from './scoreboard.actions'
 
-const initState = {
-  fligthList: {}
+const initialState = {
+  flightsList: [],
+  date: null
 }
 
-const scoreboardReducer = (state = initState, action) => {
+const scoreboardReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SCOREBOARD_LIST_RECIVED: {
+    case FLIGHTS_LIST_RECIEVED:
       return {
         ...state,
-        fligthList: action.payload.fligthList
+        flightsList: action.payload.flightsList,
+        date: action.payload.date
       }
-    }
-    default:
-      return state
+    default: return state
   }
 }
 
