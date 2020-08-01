@@ -1,21 +1,18 @@
 import React from 'react'
-import { Route, BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import Scoreboard from './scoreboard/components/Scoreboard'
+import { BrowserRouter } from 'react-router-dom'
 import store from './store'
+import SearchFlightsPage from './scoreboard/components/Scoreboard'
+import './index.scss'
 
-const App = () => {
+function App() {
   return (
-    <div className="wrapper">
-      <Provider store={store}>
-        <BrowserRouter>
-          <Route path="/:direction?/:flight?">
-            <Scoreboard />
-          </Route>
-        </BrowserRouter>
-      </Provider>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <SearchFlightsPage />
+      </BrowserRouter>
+    </Provider>
   );
-};
+}
 
 export default App

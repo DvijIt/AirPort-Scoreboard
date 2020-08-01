@@ -1,18 +1,26 @@
-import React from 'react'
-import './styles.scss'
-import Table from './Table'
-import Navigation from './Navigation'
-import SearchForm from './SearchForm'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import moment from 'moment'
+import * as flightsActions from '../scoreboard.actions'
+import SearchForm from './searchForm/SearchForm'
+import FlightsSchedule from './flightsTable/FlightsTable'
 
-const Scoreboard = () => {
+function SearchFlightsPage({ fetchFlightsList }) {
+  useEffect(() => {
+    const date = moment().format('DD-MM-YYYY')
+    fetchFlightsList(date)
+  }, []);
+
   return (
-    <div className="wrapper-container">
-      <h1 className="title">Search flight</h1>
+    <div className="wrapper">
       <SearchForm />
-      <Navigation />
-      <Table />
+      <FlightsSchedule />
     </div>
-  )
+  );
 }
 
-export default Scoreboard
+const mapDispatchToProps = {
+  fetchFlightsList: flightsActions.fetchFlightsList
+};
+
+export default connect(null, mapDispatchToProps)(SearchFlightsPage)
