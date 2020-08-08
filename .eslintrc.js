@@ -27,7 +27,8 @@ module.exports = {
     'arrow-body-style': 'off',
     'import/no-unresolved': 'off',
     'object-curly-newline': 'off',
-    'react/jsx-props-no-spreading': 'off'
+    'react/jsx-props-no-spreading': 'off',
+    'no-unused-expressions': 'off'
   },
   settings: {
     react: {

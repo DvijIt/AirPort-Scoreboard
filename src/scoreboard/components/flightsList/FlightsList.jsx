@@ -1,76 +1,56 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useParams, useLocation } from 'react-router-dom'
-import qs from 'qs'
 import { departureFlightsListSelector, arrivalFlightsListSelector } from '../../scoreboard.selectors'
 import * as flightsActions from '../../scoreboard.actions'
 import FlightBody from '../flightbody/FlightBody'
 
-const filterFlightsList = (flightsList, queryString) => {
-  console.log(queryString)
-  if (!queryString) return flightsList
-  return flightsList.filter(flight => {
-    const fltNo = `${flight['carrierID.IATA']}${flight.fltNo}`
-    return fltNo.toLowerCase().includes(queryString.toLowerCase())
-  })
-}
+const FlightsList = ({ departureFlightsList, arrivalFlightsList }) => {
+  const [flightsList, setFlightsList] = useState([])
+  const { direction } = useParams()
+  const location = useLocation()
 
-const createFlightsList = (flightsList, flightDirection) => {
+  useEffect(() => {
+    if (direction === 'arrivals') {
+      setFlightsList(arrivalFlightsList)
+    } else {
+      setFlightsList(departureFlightsList)
+    }
+  }, [location, departureFlightsList, arrivalFlightsList])
+
   return flightsList.map(flight => {
     let data = {
       term: flight.term,
       fltNo: `${flight['carrierID.IATA']}${flight.fltNo}`,
       airportName: flight['airportToID.name_en'] || flight['airportFromID.name_en'],
-      localTime: flight.timeDepShedule,
-      timeStatus: flight.timeTakeofFact,
+      getLocalTime: flight.timeDepShedule,
+      getTimeStatus: flight.timeTakeofFact,
       status: flight.status,
       name: flight.airline.en.name,
       logoUrl: flight.airline.en.logoSmallName
     }
-    if (flightDirection === 'arrivals') {
+    if (direction === 'arrivals') {
       data = {
         ...data,
-        localTime: flight.timeToStand,
-        timeStatus: flight.timeLandFact
+        getLocalTime: flight.timeToStand,
+        getTimeStatus: flight.timeLandFact
       }
     }
     return (
-      <FlightBody key={flight.ID} {...data} />
+      <FlightBody key={flight.ID} data={data} />
     )
   })
 }
 
-const FlightsList = ({ departureFlightsList, arrivalFlightsList }) => {
-  const [flightsList, setFlightsList] = useState([])
-  const [status, setStatus] = useState('')
-  const { direction } = useParams()
-  const location = useLocation()
-
-  useEffect(() => {
-    const query = qs.parse(location.search, { ignoreQueryPrefix: true })
-    if (direction && direction.includes('arrivals')) {
-      setFlightsList(filterFlightsList(arrivalFlightsList, query.search))
-      setStatus('arrivals')
-    } else {
-      setFlightsList(filterFlightsList(departureFlightsList, query.search))
-      setStatus('departures')
-    }
-  }, [location, departureFlightsList, arrivalFlightsList])
-
-  return (
-    createFlightsList(flightsList, status)
-  )
-}
-
-const mapStateToProps = state => {
+const mapState = state => {
   return {
     departureFlightsList: departureFlightsListSelector(state),
     arrivalFlightsList: arrivalFlightsListSelector(state)
   }
 }
 
-const mapDispatchToProps = {
+const mapDispatch = {
   getFlightsList: flightsActions.fetchFlightsList
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FlightsList)
+export default connect(mapState, mapDispatch)(FlightsList)

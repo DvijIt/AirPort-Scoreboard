@@ -1,8 +1,9 @@
-import { FLIGHTS_LIST_RECIEVED } from './scoreboard.actions'
+import { FLIGHTS_LIST_RECIEVED, SET_SEARCH_TEXT } from './scoreboard.actions'
 
 const initialState = {
   flightsList: [],
-  date: null
+  date: null,
+  searchText: ''
 }
 
 const scoreboardReducer = (state = initialState, action) => {
@@ -13,7 +14,13 @@ const scoreboardReducer = (state = initialState, action) => {
         flightsList: action.payload.flightsList,
         date: action.payload.date
       }
-    default: return state
+    case SET_SEARCH_TEXT:
+      return {
+        ...state,
+        searchText: action.payload
+      }
+    default:
+      return state
   }
 }
 

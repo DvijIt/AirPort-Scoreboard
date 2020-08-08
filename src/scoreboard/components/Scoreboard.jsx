@@ -1,26 +1,36 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 import * as flightsActions from '../scoreboard.actions'
 import SearchForm from './searchForm/SearchForm'
-import FlightsSchedule from './flightsTable/FlightsTable'
+import FlightsTable from './flightsTable/FlightsTable'
 
-function SearchFlightsPage({ fetchFlightsList }) {
+function Scoreboard({ fetchFlightsList }) {
   useEffect(() => {
     const date = moment().format('DD-MM-YYYY')
     fetchFlightsList(date)
-  }, []);
+  }, [])
 
   return (
     <div className="wrapper">
+      <h2 className="title">Search flight</h2>
       <SearchForm />
-      <FlightsSchedule />
+      <FlightsTable />
     </div>
-  );
+  )
 }
 
-const mapDispatchToProps = {
+const mapDispatch = {
   fetchFlightsList: flightsActions.fetchFlightsList
-};
+}
 
-export default connect(null, mapDispatchToProps)(SearchFlightsPage)
+Scoreboard.propTypes = {
+  fetchFlightsList: PropTypes.func
+}
+
+Scoreboard.defaultProps = {
+  fetchFlightsList: PropTypes.func
+}
+
+export default connect(null, mapDispatch)(Scoreboard)
