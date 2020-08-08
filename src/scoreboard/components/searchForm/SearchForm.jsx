@@ -15,7 +15,7 @@ function SearchForm({ date, setSearchText }) {
 
   const search = qs.parse(location.search, { ignoreQueryPrefix: true })
   useEffect(() => {
-    setSearchText(search.search)
+    setSearchText(search.search || '')
   })
 
   const handleSearch = event => {
