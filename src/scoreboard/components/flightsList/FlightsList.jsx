@@ -7,8 +7,9 @@ import * as flightsActions from '../../scoreboard.actions'
 import FlightBody from '../flightbody/FlightBody'
 
 const filterFlightsList = (flightsList, queryString) => {
+  console.log(queryString)
   if (!queryString) return flightsList
-  return flightsList.filter((flight) => {
+  return flightsList.filter(flight => {
     const fltNo = `${flight['carrierID.IATA']}${flight.fltNo}`
     return fltNo.toLowerCase().includes(queryString.toLowerCase())
   })

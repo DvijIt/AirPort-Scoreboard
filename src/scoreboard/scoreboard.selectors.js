@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect'
 import moment from 'moment'
 
-export const flightsListSelector = (state) => {
+export const flightsListSelector = state => {
   return state.scoreboard.flightsList
 }
 
-export const dateSelector = (state) => {
+export const dateSelector = state => {
   return state.scoreboard.date
 }
 

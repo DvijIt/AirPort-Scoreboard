@@ -8,14 +8,14 @@ import moment from 'moment'
 import { dateSelector } from '../../scoreboard.selectors'
 
 function SearchForm({ date }) {
-  const [inputValue, setInputValue] = useState('')
+  const [value, setValue] = useState('')
   const location = useLocation()
   const history = useHistory()
 
-  const handleSearch = (event) => {
+  const handleSearch = event => {
     event.preventDefault()
     let dataQuery = {
-      search: inputValue,
+      search: value,
       date
     }
     let pathname = ''
@@ -25,7 +25,7 @@ function SearchForm({ date }) {
       dataQuery = {
         ...dataQuery,
         ...qs.parse(location.search, { ignoreQueryPrefix: true }),
-        search: inputValue
+        search: value
       }
       pathname = `${location.pathname}?`
     }
@@ -42,8 +42,8 @@ function SearchForm({ date }) {
           className="search-field__input"
           type="text"
           placeholder="Airline, destination or flight #"
-          value={inputValue}
-          onChange={(event) => setInputValue(event.target.value)}
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
         />
         <button type="submit" className="search-field__btn">Search</button>
       </form>
@@ -51,7 +51,7 @@ function SearchForm({ date }) {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     date: dateSelector(state)
   }
