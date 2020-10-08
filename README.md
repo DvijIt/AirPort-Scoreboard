@@ -1,3 +1,21 @@
 # AirPort-Scoreboard
 
-Tech stack: HTML5, CSS3, SASS, BEM methodology, Javascript (ES6), https calls to the REST API on back-end
+Tech stack:
+HTML5, 
+CSS3,
+SASS,
+BEM methodology,
+Javascript (ES6),
+React/Redux,
+babel,
+redux-thunk,
+reselect,
+https calls to the REST API on back-end
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+You can use this app: https://dvijit.github.io/AirPort-Scoreboard/
